@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Orders</title>
+    </head>
+
+    <body>
+        <h1>My Orders</h1>
+        <hr>
+        <div th:if="${session.orderPlaced}">
+            <div th:text="${session.orderPlaced}"></div>
+            <th:block th:text="${@sessionUtils.removeSessionAttribute('orderPlaced')}"></th:block>
+        </div>
+        <table>
+            <tr>
+                <th>Medicine Name</th>
+                <th>Medicine Price</th>
+                <th>Quntity</th>
+                <th>Total price</th>
+                <th>Status</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="item : ${orders}">
+                <td>
+                    [[${item.medicineName}]]
+                </td>
+                <td>
+                    [[${item.medicinePrice}]]
+                </td>
+                <td>
+                    [[${item.orderQty}]]
+                </td>
+                <td>
+                    [[${item.totalPrice}]]
+                </td>
+                <td>
+                    [[${item.orderStatus}]]
+                </td>
+                <td>
+                    [[${item.orderAddress}]]
+                </td>
+                <td>
+                    [[${item.orderPhone}]]
+                </td>
+                <td>
+                    <a href="">change status</a>
+                    <a href="">cancle order</a>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

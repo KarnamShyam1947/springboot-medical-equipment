@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Index</title>
+    </head>
+
+    <body>
+        <h1>Index</h1>
+        <hr>
+        <div th:if="${session.medicineAdded}">
+            <div th:text="${session.medicineAdded}"></div>
+            <th:block th:text="${@sessionUtils.removeSessionAttribute('medicineAdded')}"></th:block>
+        </div>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Url</th>
+                <th>Description</th>
+                <th sec:authorize="isAuthenticated()">Actions</th>
+            </tr>
+            <tr th:each="item : ${medicines}">
+                <td>
+                    [[${item.name}]]
+                </td>
+                <td>
+                    [[${item.price}]]
+                </td>
+                <td>
+                    <a th:href="@{${item.imageUrl}}">link</a>
+                </td>
+                <td>
+                    [[${item.description}]]
+                </td>
+                <td sec:authorize="isAuthenticated()">
+                    <a th:href="@{/orders/place-order/}+${item.id}" sec:authorize="hasAuthority('USER')">buy</a>
+                    <a th:href="@{/medicine/edit/}+${item.id}" sec:authorize="hasAuthority('ADMIN')">edit</a>
+                    <a th:href="@{/medicine/delete/}+${item.id}" sec:authorize="hasAuthority('ADMIN')">delete</a>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html 
+    lang="en" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorate="~{layout/layout.html}">
+
+    <div layout:fragment="content">
+        <div class="cv-login">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="cv-login-box">
+                            <div class="cv-login-wlcm-box">
+                                <div class="cv-login-wlcm">
+                                    <h2>Sign Up</h2>
+                                    <p>If you don't have a personal account please sign up</p>
+                                    <a href="javascript:;" class="cv-btn">Sign up</a>
+                                </div>
+                            </div>
+                            <div class="cv-login-form">
+                                <h2>Sign in to your account</h2>
+                                <p>Use your email for login</p>
+                                <form action="/process-login" method="post" th:object="${loginDto}">
+                                    <input
+                                        type="text"
+                                        name="email"
+                                        placeholder="Enter email"
+                                        th:value="*{email}"/>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        placeholder="Enter password"
+                                        th:value="*{password}"/>
+                                    <a
+                                        href="/auth/forgot-password"
+                                        class="pa-forgot-password" >
+                                        Forgot your password?
+                                    </a>
+                                    <button type="submit" class="cv-btn">Sign in</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${param.error}">
+            <div th:switch="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">
+                <div th:case="'Bad credentials'">
+                    <script>
+                        swal("Error", "Invalid user details", "error");
+                    </script>
+                </div>
+                <div th:case="'User is disabled'">
+                    <script>
+                        swal("Error", "User account is not activated", "error");
+                    </script>
+                </div>
+                <div th:case="*">
+                    <input type="hidden" id="login" th:value="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">
+                    <script>
+                        let login = document.getElementById("login").value;
+                        swal("Error", login, "error");
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${param.logout}">
+            <script>
+                swal("success", "Logout success", "success");
+            </script>
+        </div>
+
+        <div th:if="${session.userAdded}">
+            <script>
+                swal("Success", "User added. Please check your mail and activate account", "success");
+            </script>
+            <th:block th:text="${@sessionUtils.removeSessionAttribute('userAdded')}"></th:block>
+        </div>
+
+        <div th:if="${session.token}">
+            <input type="hidden" id="token"  th:value="${session.token}">
+            <script>
+                let token = document.getElementById("token").value;
+        
+                if(token !== "") {
+                    swal("Success", token, "success")
+                }
+            </script>
+            <th:block th:text="${@sessionUtils.removeSessionAttribute('token')}"></th:block>
+        </div>
+
+        <div th:if="${session.activate}">
+            <input type="hidden" id="activate" th:value="${session.activate}">
+            <script>
+                let activate = document.getElementById("activate").value;
+        
+                if(activate !== "") {
+                    swal("Success", activate, "success")
+                }
+            </script>
+            <th:block th:text="${@sessionUtils.removeSessionAttribute('activate')}"></th:block>
+        </div>
+        
+        <div th:if="${session.forgotEmail}">
+            <input type="hidden" id="forgotEmail" th:value="${session.forgotEmail}">
+            <script>
+                let forgotEmail = document.getElementById("forgotEmail").value;
+        
+                if(forgotEmail !== "") {
+                    swal("Success", forgotEmail, "success")
+                }
+            </script>
+            <th:block th:text="${@sessionUtils.removeSessionAttribute('forgotEmail')}"></th:block>
+        </div>
+        
+        <div th:if="${session.setPassword}">
+            <input type="hidden" id="setPassword" th:value="${session.setPassword}">
+            <script>
+                let setPassword = document.getElementById("setPassword").value;
+        
+                if(setPassword !== "") {
+                    swal("Success", setPassword, "success")
+                }
+            </script>
+            <th:block th:text="${@sessionUtils.removeSessionAttribute('setPassword')}"></th:block>
+        </div>
+    </div>
+
+    <title layout:fragment="title">Login</title>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Place order</title>
+    </head>
+
+    <body>
+        <h1>Place order</h1>
+        <hr>
+
+        <form th:action="@{/orders/place-order/}" method="post" th:object="${orderDTO}">
+            <p>
+                Quntity:
+                <input type="text" name="qty" placeholder="Enter quntity" th:value="*{qty}">
+                <span th:errors="*{qty}"></span>
+            </p>
+            <p>
+                Phone number:
+                <input type="text" name="phone" placeholder="Enter phone number" th:value="*{phone}">
+                <span th:errors="*{phone}"></span>
+            </p>
+            <p>
+                Address : 
+                <textarea name="address" placeholder="Enter address" th:text="*{address}"></textarea>
+                <span th:errors="*{address}"></span>
+            </p>
+            <input type="hidden" name="medicineId" th:value="${medicine}">
+            <input type="submit" value="Place Order">
+        </form>
+    </body>
+</html>

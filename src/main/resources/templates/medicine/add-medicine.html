@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Medicine</title>
+</head>
+<body>
+    <form action="" method="post" th:object="${medicineDTO}" enctype="multipart/form-data">
+        <p>
+            name : 
+            <input th:errorclass="error" type="text" name="name" placeholder="Enter name" th:value="*{name}">
+            <span th:errors="*{name}"></span>
+        </p>
+
+        <p>
+            file : 
+            <input type="file" name="file">
+            <span th:errors="*{file}"></span>
+        </p>
+
+        <p>
+            price : 
+            <input type="text" name="price" placeholder="Enter price" th:value="*{price}">
+            <span th:errors="*{price}"></span>
+        </p>
+        
+        <p>
+            description : 
+            <textarea name="description" placeholder="Enter description" th:text="*{description}"></textarea>
+            <span th:errors="*{description}"></span>
+        </p>
+       
+        <p>
+            <input type="submit" value="Add Medicine">
+        </p>
+    </form>
+</body>
+</html>
