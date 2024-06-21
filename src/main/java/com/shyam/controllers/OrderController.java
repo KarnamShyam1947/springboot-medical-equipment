@@ -42,7 +42,7 @@ public class OrderController {
         return "orders/place-order";
     }
     
-    @PostMapping("/place-order/")
+    @PostMapping("/make-order/")
     public String processPlaceOrder(
         @Valid @ModelAttribute("orderDTO") OrderDTO orderDTO,
         BindingResult result,

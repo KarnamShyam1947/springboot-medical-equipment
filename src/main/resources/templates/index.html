@@ -1,45 +1,172 @@
-<!DOCTYPE html>
+<html 
+    lang="en" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorate="~{layout/layout.html}">
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Index</title>
-    </head>
-
-    <body>
-        <h1>Index</h1>
-        <hr>
-        <div th:if="${session.medicineAdded}">
-            <div th:text="${session.medicineAdded}"></div>
-            <th:block th:text="${@sessionUtils.removeSessionAttribute('medicineAdded')}"></th:block>
+    <div layout:fragment="content">
+        <!-- banner start -->
+        <div class="cv-banner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="cv-banner-text">
+                            <p class="cv-banner-cat">Medical personal protective equipment PPE </p>
+                            <h1>virus protection</h1>
+                            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore</p>
+                            <button class="cv-btn">Shop now</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="cv-banner-img">
+                            <img th:src="@{/images/banner1.png}" alt="images" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Url</th>
-                <th>Description</th>
-                <th sec:authorize="isAuthenticated()">Actions</th>
-            </tr>
-            <tr th:each="item : ${medicines}">
-                <td>
-                    [[${item.name}]]
-                </td>
-                <td>
-                    [[${item.price}]]
-                </td>
-                <td>
-                    <a th:href="@{${item.imageUrl}}">link</a>
-                </td>
-                <td>
-                    [[${item.description}]]
-                </td>
-                <td sec:authorize="isAuthenticated()">
-                    <a th:href="@{/orders/place-order/}+${item.id}" sec:authorize="hasAuthority('USER')">buy</a>
-                    <a th:href="@{/medicine/edit/}+${item.id}" sec:authorize="hasAuthority('ADMIN')">edit</a>
-                    <a th:href="@{/medicine/delete/}+${item.id}" sec:authorize="hasAuthority('ADMIN')">delete</a>
-                </td>
-            </tr>
-        </table>
-    </body>
+        <!-- banner end -->
+
+        <!-- new arrivals start -->
+        <div class="cv-arrival spacer-top-less">
+            <div class="container">
+                <div class="cv-heading">
+                    <h1>New arrivals</h1>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.</p>
+                </div>
+                <div class="row">
+
+                    <div th:each="item : ${medicines}" class="col-lg-3 col-sm-6">
+                        <div class="cv-product-box">
+                            <div class="cv-product-img">
+                                <img th:src="@{${item.imageUrl}}" alt="image" class="img-fluid" />
+                            </div>
+                            <div class="cv-product-data">
+                                <a href="https://kamleshyadav.com/html/medical-equipments/html/product-single.html"
+                                    class="cv-price-title">[[${item.name}]]</a>
+                                <p class="cv-pdoduct-price">[[${item.price}]]</p>
+                                <a th:href="@{/orders/place-order/}+${item.id}" class="cv-price-cart">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                        <g>
+                                            <path d="M507.519,116.384C503.721,111.712,498.021,109,492,109H129.736l-1.484-13.632l-0.053-0.438C121.099,40.812,74.583,0,20,0
+                                                C8.954,0,0,8.954,0,20s8.954,20,20,20c34.506,0,63.923,25.749,68.512,59.928l23.773,218.401C91.495,327.765,77,348.722,77,373
+                                                c0,0.167,0.002,0.334,0.006,0.5C77.002,373.666,77,373.833,77,374c0,33.084,26.916,60,60,60h8.138
+                                                c-2.034,5.964-3.138,12.355-3.138,19c0,32.532,26.467,59,59,59s59-26.468,59-59c0-6.645-1.104-13.036-3.138-19h86.277
+                                                c-2.034,5.964-3.138,12.355-3.138,19c0,32.532,26.467,59,59,59c32.533,0,59-26.468,59-59c0-32.532-26.467-59-59-59H137
+                                                c-11.028,0-20-8.972-20-20c0-0.167-0.002-0.334-0.006-0.5c0.004-0.166,0.006-0.333,0.006-0.5c0-11.028,8.972-20,20-20h255.331
+                                                c35.503,0,68.084-21.966,83.006-55.962c4.439-10.114-0.161-21.912-10.275-26.352c-10.114-4.439-21.912,0.161-26.352,10.275
+                                                C430.299,300.125,411.661,313,392.331,313h-240.39L134.09,149h333.308l-9.786,46.916c-2.255,10.813,4.682,21.407,15.495,23.662
+                                                c1.377,0.288,2.75,0.426,4.104,0.426c9.272,0,17.59-6.484,19.558-15.92l14.809-71C512.808,127.19,511.317,121.056,507.519,116.384
+                                                z M399,434c10.477,0,19,8.523,19,19s-8.523,19-19,19s-19-8.523-19-19S388.523,434,399,434z M201,434c10.477,0,19,8.524,19,19
+                                                c0,10.477-8.523,19-19,19s-19-8.523-19-19S190.523,434,201,434z"></path>
+                                        </g>
+                                    </svg>
+                                    Cart</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- new arrivals end -->
+
+        <!-- testimonial start -->
+        <div class="cv-testimonial spacer-top-less">
+            <div class="container">
+                <div class="cv-heading">
+                    <h1>Customer review</h1>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.</p>
+                </div>
+                <div class="row">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="cv-testi-box">
+                                    <div class="cv-testi-data">
+                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                                            voluptate velit esse cillum dolore.</p>
+                                    </div>
+                                    <div class="cv-testi-footer">
+                                        <div class="cv-testi-img">
+                                            <img th:src="@{/images/user.jpg}" alt="image" class="img-fluid" />
+                                        </div>
+                                        <div class="cv-testi-name">
+                                            <h1>John Michel</h1>
+                                            <p>Manager</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="cv-testi-box">
+                                    <div class="cv-testi-data">
+                                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                                            voluptate velit esse cillum dolore.</p>
+                                    </div>
+                                    <div class="cv-testi-footer">
+                                        <div class="cv-testi-img">
+                                            <img th:src="@{/images/user2.jpg}" alt="image" class="img-fluid" />
+                                        </div>
+                                        <div class="cv-testi-name">
+                                            <h1>John Michel</h1>
+                                            <p>Manager</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Arrows -->
+                    <div class="cv-arrow">
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- testimonial end -->
+
+        <!-- partner start -->
+        <div class="cv-partners spacer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a href="javascript:;"><img th:src="@{/images/client2.jpg}" alt="image"
+                                            class="img-fluid" /></a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a href="javascript:;"><img th:src="@{/images/client1.jpg}" alt="image"
+                                            class="img-fluid" /></a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a href="javascript:;"><img th:src="@{/images/client3.jpg}" alt="image"
+                                            class="img-fluid" /></a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a href="javascript:;"><img th:src="@{/images/client4.jpg}" alt="image"
+                                            class="img-fluid" /></a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a href="javascript:;"><img th:src="@{/images/client5.jpg}" alt="image"
+                                            class="img-fluid" /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- partner end -->
+    </div>
+
 </html>

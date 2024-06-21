@@ -100,6 +100,12 @@ img {
 }
 .cv-btn:focus,input:focus,textarea:focus,button:focus{
     outline: none;
+    border-color: #3cbcff !important;
+}
+
+textarea.error,
+input.error {
+    border-color: red;
 }
 input {
     width: 100%;
@@ -1304,7 +1310,7 @@ p#me_timer span {
 /* breadcrumb start */
 .cv-breadcrumb {
     padding: 71px 0 73px;
-    background: linear-gradient(to left, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../../../assets/images/breadcrumb.jpg);
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/images/breadcrumb.jpg);
 }
 .cv-breadcrumb-box h1 {
     font-size: 36px;

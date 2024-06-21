@@ -1,10 +1,9 @@
 package com.shyam.controllers;
 
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.shyam.services.MedicineService;
 
@@ -22,15 +21,39 @@ public class HomeController {
         return "index";
     }
     
-    @ResponseBody
     @GetMapping("/about")
     public Object about(){
-        return SecurityContextHolder.getContext().getAuthentication();
+        return "pages/about";
+    }
+    
+    @GetMapping("/contact")
+    public Object contact(){
+        return "pages/contact";
+    }
+    
+    @GetMapping("/services")
+    public Object services(){
+        return "pages/services";
+    }
+
+    @GetMapping("/shop")
+    public Object shop(Model model){
+        model.addAttribute("medicines", medicineService.getAllMedicines());
+        return "pages/shop";
     }
     
     @GetMapping("/test")
     public Object test(){
         return "test";
+    }
+
+    @GetMapping("/medicine-details/{medicineId}")
+    public String singleProduct(
+        @PathVariable("medicineId") int medicineId,
+        Model model
+    ) { 
+        model.addAttribute("medicine", medicineService.getMedicine(medicineId));
+        return "medicine/details";
     }
 
 }

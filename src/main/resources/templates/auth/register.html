@@ -1,38 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-</head>
-<body>
-    <form action="/auth/register" method="post" th:object="${userDto}">
-        <p>
-            name : 
-            <input th:errorclass="error" type="text" name="name" placeholder="Enter name" th:value="*{name}">
-            <span th:errors="*{name}"></span>
-        </p>
+<html 
+    lang="en" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorate="~{layout/layout.html}">
 
-        <p>
-            Email : 
-            <input type="text" name="email" placeholder="Enter email" th:value="*{email}">
-            <span th:errors="*{email}"></span>
-        </p>
-        
-        <p>
-            Password : 
-            <input type="password" name="password" placeholder="Enter password" th:value="*{password}">
-            <span th:errors="*{password}"></span>
-        </p>
-       
-        <p>
-            Reenter Password : 
-            <input type="password" name="reenterPassword" placeholder="Renter password" th:value="*{reenterPassword}">
-            <span th:errors="*{reenterPassword}"></span>
-        </p>
-        <p>
-            <input type="submit" value="Register">
-        </p>
-    </form>
-</body>
-</html>
+    <div layout:fragment="content">
+
+        <div class="cv-breadcrumb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="cv-breadcrumb-box">
+                            <h1>Product Single</h1>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li>Product Single</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cv-login">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="cv-login-box">
+                            <div class="cv-login-wlcm-box">
+                                <div class="cv-login-wlcm">
+                                    <h2>Sign Up</h2>
+                                    <p>If you already have a personal account please sign in</p>
+                                    <a href="login.html" class="cv-btn">Sign in</a>
+                                </div>
+                            </div>
+                            <div class="cv-login-form">
+                                <h2>Sign Up create new account account</h2>
+                                <form action="/auth/register" method="post" th:object="${userDto}">
+                                    <input 
+                                        name="name" 
+                                        type="text" 
+                                        th:value="*{name}"
+                                        th:errorclass="error" 
+                                        placeholder="Enter name" 
+                                    />
+                                    <span class="text-danger" th:errors="*{name}"></span>
+
+                                    <input 
+                                        type="text" 
+                                        name="email" 
+                                        th:value="*{email}"
+                                        th:errorclass="error" 
+                                        placeholder="Enter email" 
+                                    />
+                                    <span class="text-danger" th:errors="*{email}"></span>
+
+                                    <input 
+                                        type="password" 
+                                        name="password" 
+                                        th:value="*{password}"
+                                        th:errorclass="error" 
+                                        placeholder="Enter password" 
+                                    />
+                                    <span class="text-danger" th:errors="*{password}"></span>
+
+                                    <input 
+                                        type="password" 
+                                        th:errorclass="error" 
+                                        name="reenterPassword" 
+                                        placeholder="Renter password" 
+                                        th:value="*{reenterPassword}"
+                                    />
+                                    <span class="text-danger" th:errors="*{reenterPassword}"></span>
+
+                                    <button type="submit" class="cv-btn">Sign Up</button>
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</html> 

@@ -18,7 +18,7 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Integer> {
     @Query(value = 
         """
         SELECT
-            new com.shyam.dto.MedicineOrderDTO(m.name, m.price, o.qty, o.totalPrice, o.status, o.id, o.address, o.phone)
+            new com.shyam.dto.MedicineOrderDTO(m.id, m.name, m.price, o.qty, o.totalPrice, o.status, o.id, o.address, o.phone)
         FROM
             OrderEntity o
         JOIN

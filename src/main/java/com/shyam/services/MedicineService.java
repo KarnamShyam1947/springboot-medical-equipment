@@ -43,5 +43,4 @@ public class MedicineService {
     public MedicineEntity getMedicine(String name) {
         return medicineRepository.findByName(name);
     }
-
 }

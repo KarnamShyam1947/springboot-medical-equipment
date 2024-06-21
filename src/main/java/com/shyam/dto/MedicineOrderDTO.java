@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MedicineOrderDTO {
+    private int medicineId;
     private String medicineName;
     private double medicinePrice;
     private int orderQty;

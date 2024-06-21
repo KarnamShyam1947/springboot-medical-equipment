@@ -9,4 +9,5 @@ import com.shyam.entities.MedicineEntity;
 public interface MedicineRepository extends JpaRepository<MedicineEntity, Integer> {
     MedicineEntity findByName(String name);
     MedicineEntity findById(int id);
+
 }

@@ -1,56 +1,79 @@
-<!DOCTYPE html>
+<html 
+    lang="en" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorate="~{layout/layout.html}">
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>My Orders</title>
-    </head>
-
-    <body>
-        <h1>My Orders</h1>
-        <hr>
+    <div layout:fragment="content">
         <div th:if="${session.orderPlaced}">
-            <div th:text="${session.orderPlaced}"></div>
+            <input type="hidden" id="orderPlaced"  th:value="${session.orderPlaced}">
+            <script>
+                let orderPlaced = document.getElementById("orderPlaced").value;
+        
+                if(orderPlaced !== "") {
+                    swal("Success", orderPlaced, "success")
+                }
+            </script>
             <th:block th:text="${@sessionUtils.removeSessionAttribute('orderPlaced')}"></th:block>
         </div>
-        <table>
-            <tr>
-                <th>Medicine Name</th>
-                <th>Medicine Price</th>
-                <th>Quntity</th>
-                <th>Total price</th>
-                <th>Status</th>
-                <th>Address</th>
-                <th>Phone Number</th>
-                <th>Action</th>
-            </tr>
-            <tr th:each="item : ${orders}">
-                <td>
-                    [[${item.medicineName}]]
-                </td>
-                <td>
-                    [[${item.medicinePrice}]]
-                </td>
-                <td>
-                    [[${item.orderQty}]]
-                </td>
-                <td>
-                    [[${item.totalPrice}]]
-                </td>
-                <td>
-                    [[${item.orderStatus}]]
-                </td>
-                <td>
-                    [[${item.orderAddress}]]
-                </td>
-                <td>
-                    [[${item.orderPhone}]]
-                </td>
-                <td>
-                    <a href="">change status</a>
-                    <a href="">cancle order</a>
-                </td>
-            </tr>
-        </table>
-    </body>
+
+        <!-- breadcrumb start -->
+        <div class="cv-breadcrumb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="cv-breadcrumb-box">
+                            <h1>Orders</h1>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li>Orders</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- breadcrumb end -->
+
+        <!-- cart start -->
+        <div class="cv-cart spacer-top spacer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="cv-last-order">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Product name</th>
+                                        <th>Phone Number</th>
+                                        <th>Delivery Address</th>
+                                        <th>unit price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="item : ${orders}">
+                                        <td>
+                                            <a th:href="@{/medicine-details/}+${item.medicineId}">[[${item.medicineName}]]</a>
+                                        </td>
+                                        <td>[[${item.orderPhone}]]</td>
+                                        <td>[[${item.orderAddress}]]</td>
+                                        <td>[[${item.medicinePrice}]]</td>
+                                        <td>[[${item.orderQty}]]</td>
+                                        <td>[[${item.totalPrice}]]</td>
+                                        <td>
+                                            <a href="#" class="btn btn-danger">cancel</a>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- cart end -->
+    </div>
 </html>

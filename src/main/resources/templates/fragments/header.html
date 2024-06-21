@@ -10,11 +10,46 @@
                 <div class="cv-nav-bar">
                     <div class="cv-menu">
                         <ul>
-                            <li><a class="active" href="/">Home</a></li>
-                            <li><a href="shop.html">Shop</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="service.html">Service</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li>
+                                <a 
+                                    th:class="${@requestUtils.getCurrentUrl() == '/' ? 'active':''}" 
+                                    href="/">
+                                    Home
+                                </a>
+                            </li>
+
+                            <li>
+                                <a 
+                                    th:class="${@requestUtils.getCurrentUrl() == '/shop' ? 'active':''}" 
+                                    href="/shop">
+                                    Shop
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a 
+                                    th:class="${@requestUtils.getCurrentUrl() == '/about' ? 'active':''}" 
+                                    href="/about">
+                                    About
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a 
+                                    th:class="${@requestUtils.getCurrentUrl() == '/services' ? 'active':''}" 
+                                    href="/services">
+                                    Service
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a 
+                                    th:class="${@requestUtils.getCurrentUrl() == '/contact' ? 'active':''}" 
+                                    href="/contact">
+                                    Contact
+                                </a>
+                            </li>
+                            
                         </ul>
                     </div>
                     <div class="cv-toggle-nav">
